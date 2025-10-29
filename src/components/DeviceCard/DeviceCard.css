@@ -1,0 +1,96 @@
+.card {
+    width: 200px;
+    height: 283px;
+    font-size: 14px;
+    border-radius: 6px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 160px;
+    height: 160px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.card h1{
+    font-size: 14px;
+    font-weight: 400;
+    align-items: left;
+    align-self: flex-start;
+    margin-left: 20px;
+    min-height: 33.6px;
+}
+
+.card p {
+    font-size: 14px;
+    font-weight: 400;
+    align-items: left;
+    align-self: flex-start;
+    margin-left: 20px;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-self: flex-start;
+    margin-left: 20px;
+    width: calc(100% - 40px);
+}
+
+.card-button {
+    width: 75px;
+    height: 40px;
+    border-radius: 6px;
+    background-color: #DE231E;
+    color: white;
+    align-content: center;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+.card-button:hover {
+    background-color: #B91D19;
+}
+
+.card-button:active {
+    background-color: #751714;
+}
+
+/* .card-application-button {
+    width: 75px;
+    height: 40px;
+    border-radius: 6px;
+    background-color: white;
+    color: #DE231E;
+    border: 1px solid #DE231E;
+    align-content: center;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.card-application-button:hover {
+    background-color: #f0f0f8;
+}
+
+.card-application-button:active {
+    background-color: #ccc0c0;
+} */

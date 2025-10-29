@@ -1,0 +1,58 @@
+.home-banner .btn-primary {
+    background-color: #DE231E !important;
+    border-color: #DE231E !important;
+}
+
+.home-banner .btn-primary:hover {
+    background-color: #B91D19 !important;
+    border-color: #B91D19 !important;
+}
+
+.home-banner .btn-primary:active {
+    background-color: #751714 !important;
+    border-color: #751714 !important;
+}
+
+.home-banner {
+    background-image: url('https://a.mktgcdn.com/p/5JKT0hZj0ybLCaVqxcZLOn-BWWEAD9-qgh8rz8ZxypM/2560x1600.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 500px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.home-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.banner-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.banner-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
