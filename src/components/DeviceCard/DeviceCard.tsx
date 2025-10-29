@@ -10,9 +10,6 @@ export default function DeviceCard({ device }: { device: Device; }) {
     const getImageUrl = (photo: string) => {
         if (!photo) return defaultDeviceImage;
 
-        if (photo.startsWith('/src') || photo.startsWith('/assets') || photo.startsWith('data:')) {
-            return photo;
-        }
 
         return `http://localhost:9000/test/${photo}`;
     };

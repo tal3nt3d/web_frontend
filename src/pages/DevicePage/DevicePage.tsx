@@ -45,10 +45,6 @@ export default function DevicePage() {
   const getImageUrl = (photo: string) => {
     if (!photo || imageError) return '/src/assets/device_error.png';
 
-    if (photo.startsWith('/src') || photo.startsWith('/assets') || photo.startsWith('data:')) {
-      return photo;
-    }
-
     return `http://localhost:9000/test/${photo}`;
   };
 
