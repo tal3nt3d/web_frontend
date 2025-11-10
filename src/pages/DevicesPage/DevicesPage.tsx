@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header';
 import Search from '../../components/InputField/InputField';
 import DevicesList from '../../components/DevicesList/DevicesList';
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs';
+import CartButton from '../../components/CartButton/CartButton';
 import { ROUTE_LABELS } from '../../Routes';
 import { listDevices } from '../../modules/devicesApi';
 import { DEVICES_MOCK } from '../../modules/mock'; 
@@ -64,6 +65,26 @@ export default function DevicesPage() {
     }
   };
 
+  const handleCartClick = async () => {
+    try {
+      const response = await fetch('/api/v1/amperage_application/amperage_application-cart', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
+      console.log('Cart request successful');
+      
+    } catch (error) {
+      console.error('Error making cart request:', error);
+    }
+  };
+
   return (
     <div className="devices-page">
       <Header />
@@ -103,6 +124,7 @@ export default function DevicesPage() {
           )}
         </div>
       </main>
+       <CartButton onClick={handleCartClick} />
     </div>
   );
 }

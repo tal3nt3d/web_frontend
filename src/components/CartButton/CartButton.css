@@ -1,0 +1,48 @@
+.cart-button {
+  position: fixed;
+  left: 120px;
+  bottom: 40px;
+  width: 130px;
+  height: 130px;
+  border-radius: 6px;
+  background-color: white;
+  color: #DE231E;
+  border: 1px solid #DE231E;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.cart-button:hover {
+  background-color: #f0f0f8;
+}
+
+.cart-button:active {
+  background-color: #ccc0c0;
+}
+
+.cart-button img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #DE231E;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
