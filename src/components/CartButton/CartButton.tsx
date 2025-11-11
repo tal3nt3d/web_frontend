@@ -1,4 +1,5 @@
 import './CartButton.css';
+import wrench from "../../assets/wrench.svg"
 
 interface CartButtonProps {
   onClick: () => void;
@@ -11,7 +12,7 @@ export default function CartButton({ onClick }: CartButtonProps) {
       onClick={onClick}
     >
       <img 
-        src="/src/assets/wrench.svg" 
+        src={wrench} 
         alt="Корзина" 
       />
     </button>

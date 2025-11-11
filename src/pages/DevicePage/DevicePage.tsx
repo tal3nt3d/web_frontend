@@ -8,6 +8,7 @@ import { Spinner } from 'react-bootstrap';
 import Header from '../../components/Header/Header';
 import { DEVICES_MOCK } from '../../modules/mock'; 
 import './DevicePage.css';
+import deviceErrorPhoto from '../../assets/device_error.png'
 
 export default function DevicePage() {
   const [device, setDevice] = useState<Device | null>(null);
@@ -43,7 +44,7 @@ export default function DevicePage() {
 
 
   const getImageUrl = (photo: string) => {
-    if (!photo || imageError) return '/src/assets/device_error.png';
+    if (!photo || imageError) return deviceErrorPhoto;
 
     return `http://localhost:9000/test/${photo}`;
   };

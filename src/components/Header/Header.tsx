@@ -5,7 +5,7 @@ export default function Header() {
     return (
         <header>
             <nav className = "navbar">
-                <a href = "/"><img src = {logo} alt = "logo" /></a>    
+                <a href = "/web_frontend"><img src = {logo} alt = "logo" /></a>    
             </nav>
         </header>
     )
