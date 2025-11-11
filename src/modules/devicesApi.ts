@@ -7,7 +7,7 @@ export interface Device {
 	is_delete:    boolean 
 }
 
-export async function listDevices(params?: { title?: string; date_from?: string; date_to?: string }): Promise<Device[]> {
+export async function listDevices(params?: { title?: string}): Promise<Device[]> {
   try {
     let path = "/api/v1/devices";
     if (params) {

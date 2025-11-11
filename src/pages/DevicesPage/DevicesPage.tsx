@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import Search from '../../components/InputField/InputField';
 import DevicesList from '../../components/DevicesList/DevicesList';
@@ -7,63 +7,57 @@ import CartButton from '../../components/CartButton/CartButton';
 import { ROUTE_LABELS } from '../../Routes';
 import { listDevices } from '../../modules/devicesApi';
 import { DEVICES_MOCK } from '../../modules/mock'; 
-import type { Device } from '../../modules/devicesApi';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setDevices, setLoading } from '../../store/slices/deviceSlice';
+import { setSearchName, addToHistory } from '../../store/slices/searchSlice';
 import './DevicesPage.css';
 
 export default function DevicesPage() {
-  const [devices, setDevices] = useState<Device[]>([]);
-  const [searchTitle, setSearchTitle] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [useMock, setUseMock] = useState(false);
+  const dispatch = useAppDispatch();
+  const { devices, loading } = useAppSelector(state => state.devices);
+  const { searchTitle } = useAppSelector(state => state.search);
 
-  useEffect(() => {
-    if (useMock) {
-      setDevices(DEVICES_MOCK);
-    } else {
-      listDevices()
-        .then((data) => {
-          if (data.length > 0) {
-            setDevices(data);
-          } else {
-            setDevices(DEVICES_MOCK);
-            setUseMock(true);
-          }
-        })
-        .catch(() => {
-          setDevices(DEVICES_MOCK);
-          setUseMock(true);
-        });
-    }
-  }, [useMock]);
-
-  const handleSearch = async () => {
-    setLoading(true);
+  const loadData = async (searchQuery?: string) => {
+    dispatch(setLoading(true));
+    
     try {
-      const filtered = await listDevices({ title: searchTitle });
+      const apiData = await listDevices({ title: searchQuery });
       
-      if (filtered.length > 0) {
-        setDevices(filtered);
-        setUseMock(false);
+      if (apiData.length > 0) {
+        dispatch(setDevices(apiData));
       } else {
-        if (useMock) {
-          const filteredMock = DEVICES_MOCK.filter(device =>
-            device.title.toLowerCase().includes(searchTitle.toLowerCase())
+        let filteredMock = DEVICES_MOCK;
+        if (searchQuery) {
+          filteredMock = DEVICES_MOCK.filter(device =>
+            device.title.toLowerCase().includes(searchQuery.toLowerCase())
           );
-          setDevices(filteredMock);
-        } else {
-          setDevices([]);
         }
+        dispatch(setDevices(filteredMock));
       }
     } catch (error) {
-      const filteredMock = DEVICES_MOCK.filter(device =>
-        device.title.toLowerCase().includes(searchTitle.toLowerCase())
-      );
-      setDevices(filteredMock);
-      setUseMock(true);
+      let filteredMock = DEVICES_MOCK;
+      if (searchQuery) {
+        filteredMock = DEVICES_MOCK.filter(device =>
+          device.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+      dispatch(setDevices(filteredMock));
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
+
+  useEffect(() => {
+    loadData(searchTitle);
+  }, []);
+
+  const handleSearch = async () => {
+    if (searchTitle) {
+      dispatch(addToHistory(searchTitle));
+    }
+    await loadData(searchTitle);
+  };
+
 
   const handleCartClick = async () => {
     try {
@@ -101,7 +95,7 @@ export default function DevicesPage() {
           <div className="services-search">
             <Search 
               query={searchTitle}
-              onQueryChange={setSearchTitle}
+              onQueryChange={(value) => dispatch(setSearchName(value))}
               onSearch={handleSearch}
             />
           </div>
