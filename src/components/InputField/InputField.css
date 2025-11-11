@@ -24,3 +24,16 @@ form input {
 .search-button:active {
     background-color: #751714;
 }
+
+@media (max-width: 480px) {
+    form input {
+        height: 42px;
+        font-size: 14px;
+    }
+
+    .search-button {
+        width: 36px;
+        height: 36px;
+        margin-left: -45px;
+    }
+}
