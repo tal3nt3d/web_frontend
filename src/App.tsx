@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
-    <BrowserRouter basename="/web_frontend">
+    <BrowserRouter basename="">
       <Routes>
         <Route path={ROUTES.HOME} element={<HomePage />} />
         <Route path={ROUTES.Devices} element={<DevicesPage />} />

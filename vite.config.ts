@@ -35,11 +35,11 @@ export default defineConfig({
       }
     })
   ],
-  base: '/web_frontend',
+  base: '/',
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:8080",
+        target: "http://172.27.61.159:8080",
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, "/"),
       },
