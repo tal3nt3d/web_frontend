@@ -1,33 +1,89 @@
 .order-card {
-    width: 1273px;
-    height: 400px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-    background-color: #ffffff;
-    border-radius: 6px;
-    margin-left: auto;
-    margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin: 40px auto;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .order-card .image {
-    width: 400px;
-    height: 400px;
-    border-radius: 6px;
-    object-fit: cover;
+  width: 400px;
+  aspect-ratio: 1 / 1; 
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.order-card .row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  flex: 1;
+  word-break: break-word;
 }
 
 .order-card h1 {
-    font-size: 28px;
-    font-weight: 700;
-    color: #000000;
-    margin: 0px !important;
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 !important;
 }
 
 .order-card p {
+  font-size: 20px;
+  font-weight: 400;
+  color: #000;
+  margin: 0 !important;
+  line-height: 1.4;
+}
+
+@media (max-width: 992px) {
+  .order-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 90%;
+  }
+
+  .order-card .image {
+    width: 300px; 
+  }
+
+  .order-card .row {
+    align-items: center;
+  }
+
+  .order-card h1 {
+    font-size: 24px;
+  }
+
+  .order-card p {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .order-card {
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .order-card .image {
+    width: 220px;
+  }
+
+  .order-card h1 {
     font-size: 20px;
-    font-weight: 400;
-    color: #000000;
-    margin: 0px !important;
+  }
+
+  .order-card p {
+    font-size: 16px;
+  }
 }

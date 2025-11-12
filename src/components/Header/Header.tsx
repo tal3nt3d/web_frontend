@@ -26,7 +26,7 @@ export default function Header() {
             Главная
           </NavLink>
           <NavLink to="/devices" className="header__link">
-            Товары
+            Устройства
           </NavLink>
           {/* <NavLink to="/orders" className="header__link">
             Заказы
@@ -46,7 +46,7 @@ export default function Header() {
               Главная
             </NavLink>
             <NavLink to="/devices" className="header__link">
-              Товары
+              Устройства
             </NavLink>
             {/* <NavLink to="/orders" className="header__link">
               Заказы
