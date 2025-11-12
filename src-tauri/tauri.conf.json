@@ -5,14 +5,18 @@
   "identifier": "com.tal3nt3d.web-frontend",
   "build": {
     "frontendDist": "../dist",
-    "devUrl": "https://172.27.61.159:3000",
+    "devUrl": "https://localhost:3000",
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build"
   },
   "plugins": {
     "http": {
-          "enabled": true
-        }
+        "enabled": true,
+        "scope": [
+          "http://localhost:8080/*",
+          "http://localhost:9000/*"
+        ]
+      }
   },
   "app": {
     "withGlobalTauri": true,
@@ -22,7 +26,8 @@
         "width": 800,
         "height": 600,
         "resizable": true,
-        "fullscreen": false
+        "fullscreen": false,
+        "devtools": true
       }
     ],
     "security": {
