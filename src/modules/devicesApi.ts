@@ -9,7 +9,8 @@ export interface Device {
 
 export async function listDevices(params?: { title?: string}): Promise<Device[]> {
   try {
-    let path = `/api/v1/devices`;    
+    const API_BASE = "https://172.27.61.159:8080";
+    let path = `${API_BASE}/api/v1/devices`;    
     if (params) {
       const query = new URLSearchParams();
       if (params.title) query.append("device_title", params.title);
@@ -32,7 +33,9 @@ export async function listDevices(params?: { title?: string}): Promise<Device[]>
 
 export async function getDevice(id: number): Promise<Device | null> {
   try {
-    const res = await fetch(`/api/v1/device/${id}`, { headers: { Accept: "application/json" } });
+    const API_BASE = "https://172.27.61.159:8080";
+    const path = `${API_BASE}/api/v1/device/${id}`;
+    const res = await fetch(path, { headers: { Accept: "application/json" } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {

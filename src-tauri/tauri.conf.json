@@ -11,15 +11,12 @@
   },
   "plugins": {
     "http": {
-        "enabled": true,
-        "scope": [
-          "http://localhost:8080/*",
-          "http://localhost:9000/*"
-        ]
+        "enabled": true
       }
   },
   "app": {
-    "withGlobalTauri": true,
+    "withGlobalTauri": false
+    ,
     "windows": [
       {
         "title": "web_frontend",
@@ -31,7 +28,7 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self' http://172.27.61.159:8080; connect-src 'self' http://172.27.61.159:8080;"
     }
   },
   "bundle": {
