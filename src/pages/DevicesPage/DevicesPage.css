@@ -72,15 +72,8 @@ body {
     }
 
     .cart-button {
-        width: 90px;
-        height: 90px;
-        left: 25px;
-        bottom: 30px;
-    }
-
-    .cart-button img {
-        width: 60px;
-        height: 60px;
+        left: 15px;
+        bottom: 15px;
     }
 }
 
@@ -107,14 +100,7 @@ body {
     }
 
     .cart-button {
-        width: 70px;
-        height: 70px;
-        left: 15px;
-        bottom: 20px;
-    }
-
-    .cart-button img {
-        width: 50px;
-        height: 50px;
+        left: 10px;
+        bottom: 10px;
     }
 }
