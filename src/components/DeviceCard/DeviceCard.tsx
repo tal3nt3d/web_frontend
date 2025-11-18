@@ -9,9 +9,10 @@ export default function DeviceCard({ device }: { device: Device; }) {
     
     const getImageUrl = (photo: string) => {
         if (!photo) return defaultDeviceImage;
+        const API_BASE = "http://172.27.61.159:9000";
+        let path = `${API_BASE}/test/${photo}`; 
 
-
-        return `http://localhost:9000/test/${photo}`;
+        return path;
     };
 
     const [imageUrl, setImageUrl] = useState(getImageUrl(device.photo));

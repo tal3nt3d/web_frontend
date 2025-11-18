@@ -33,6 +33,7 @@ export default defineConfig({
   ],
   base: '/',
   server: {
+    cors: true,
     watch: {
         usePolling: true,
     }, 
@@ -40,11 +41,16 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "http://172.27.61.159:8080",
+        target: "http://192.168.1.101:8080",
         changeOrigin: true,
         secure: false,
         //rewrite: (path) => path.replace(/^\/api/, "/api"),
       },
+      "/test": {
+        target: "http://192.168.1.101:9000",
+        changeOrigin: true,
+        secure: false,
+      }
     },
   },
 });

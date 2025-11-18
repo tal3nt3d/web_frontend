@@ -9,7 +9,7 @@ export interface Device {
 
 export async function listDevices(params?: { title?: string}): Promise<Device[]> {
   try {
-    const API_BASE = "https://172.27.61.159:8080";
+    const API_BASE = "http://172.27.61.159:8080";
     let path = `${API_BASE}/api/v1/devices`;    
     if (params) {
       const query = new URLSearchParams();
@@ -33,7 +33,7 @@ export async function listDevices(params?: { title?: string}): Promise<Device[]>
 
 export async function getDevice(id: number): Promise<Device | null> {
   try {
-    const API_BASE = "https://172.27.61.159:8080";
+    const API_BASE = "http://172.27.61.159:8080";
     const path = `${API_BASE}/api/v1/device/${id}`;
     const res = await fetch(path, { headers: { Accept: "application/json" } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
