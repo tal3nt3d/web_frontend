@@ -9,7 +9,7 @@ form input {
 }
 
 .search-button {
-    background-color: #DE231E;
+    background-color: #ff0000;
     border-radius: 6px;
     position: relative;
     width: 40px;
@@ -18,11 +18,11 @@ form input {
 }
 
 .search-button:hover {
-    background-color: #B91D19;
+    background-color: #ce241e;
 }
 
 .search-button:active {
-    background-color: #751714;
+    background-color: #b01611;
 }
 
 @media (max-width: 480px) {

@@ -49,7 +49,7 @@
     width: 75px;
     height: 40px;
     border-radius: 6px;
-    background-color: #DE231E;
+    background-color: #ff0000;
     color: white;
     align-content: center;
     text-align: center;
@@ -63,11 +63,11 @@
 }
 
 .card-button:hover {
-    background-color: #B91D19;
+    background-color: #ce241e;
 }
 
 .card-button:active {
-    background-color: #751714;
+    background-color: #b01611;
 }
 
 /* .card-application-button {

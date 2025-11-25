@@ -1,15 +1,26 @@
 import { type MouseEvent } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Header.css';
 import logo from '../../assets/logo.svg'
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../../store';
+import { logoutUser } from '../../store/slices/userSlice';
+import './Header.css';
 
 export default function Header() {
-    const handleBurgerClick = (event: MouseEvent<HTMLDivElement>) => {
+  const handleBurgerClick = (event: MouseEvent<HTMLDivElement>) => {
     event.currentTarget.classList.toggle('active');
   };
+  
+  const { isAuthenticated, username } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleMenuClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUser(username));
   };
 
   return (
@@ -17,7 +28,7 @@ export default function Header() {
       <div className="header__wrapper">
         <div className="header__logo">
           <NavLink to="/" className="header__logo-link">
-            <img src = {logo}></img>
+            <img src={logo} alt="Logo" />
           </NavLink>
         </div>
 
@@ -28,15 +39,27 @@ export default function Header() {
           <NavLink to="/devices" className="header__link">
             Устройства
           </NavLink>
-          {/* <NavLink to="/orders" className="header__link">
-            Заказы
-          </NavLink>
-          <NavLink to="/about" className="header__link">
-            О магазине
-          </NavLink>
-          <NavLink to="/cart" className="header__link header__link--cart">
-            Корзина
-          </NavLink> */}
+          
+          {isAuthenticated ? (
+            <div className="user-menu">
+              <NavLink to={`/users/${username}/info`} className="header__link">
+                Профиль
+              </NavLink>
+              <Link to={`/`} className="header__link" onClick={handleLogout}>
+                Выйти
+              </Link>
+              <span className="username">Привет, {username}!</span>
+            </div>
+          ) : (
+            <>
+              <NavLink to="/signin" className="header__link">
+                Войти
+              </NavLink>
+              <NavLink to="/signup" className="header__link">
+                Регистрация
+              </NavLink>
+            </>
+          )}
         </nav>
 
         <div className="header__mobile-wrapper" onClick={handleBurgerClick}>
@@ -48,15 +71,27 @@ export default function Header() {
             <NavLink to="/devices" className="header__link">
               Устройства
             </NavLink>
-            {/* <NavLink to="/orders" className="header__link">
-              Заказы
-            </NavLink>
-            <NavLink to="/about" className="header__link">
-              О магазине
-            </NavLink>
-            <NavLink to="/cart" className="header__link header__link--cart">
-              Корзина
-            </NavLink> */}
+            
+            {isAuthenticated ? (
+              <div className="user-menu-mobile">
+                <NavLink to={`/users/${username}/info`} className="header__link">
+                  Профиль
+                </NavLink>
+                <NavLink to={`/`} className="header__link" onClick={handleLogout}>
+                  Выйти
+                </NavLink>
+                <span className="username">Привет, {username}!</span>
+              </div>
+            ) : (
+              <>
+                <NavLink to="/signin" className="header__link">
+                  Войти
+                </NavLink>
+                <NavLink to="/signup" className="header__link">
+                  Регистрация
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
       </div>

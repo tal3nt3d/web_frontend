@@ -1,120 +1,166 @@
+/* Header.css */
 .header {
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 20px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e8e8e8;
+  position: relative;
 }
 
 .header__wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
+  height: 70px;
 }
 
-.header__logo-link {
-  font-size: 22px;
-  font-weight: 700;
-  color: #e30613;
-  text-decoration: none;
+.header__logo img {
+  height: 40px;
+  width: auto;
 }
 
 .header__nav {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
 .header__link {
+  color: #333;
   text-decoration: none;
-  color: #222;
   font-weight: 500;
-  transition: color 0.2s;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
 }
 
 .header__link:hover {
-  color: #e30613;
+  color: #ff0000;
 }
 
+.header__link.active {
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.05);
+}
+
+/* Стили для меню пользователя */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: 10px;
+}
+
+.username {
+  color: #666;
+  font-weight: 500;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+/* Мобильное меню пользователя */
+.user-menu-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 10px;
+}
+
+.user-menu-mobile .username {
+  text-align: center;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  margin: 0;
+}
+
+/* Мобильное меню */
 .header__mobile-wrapper {
   display: none;
-  height: 30px;
-  width: 30px;
-  transition: all 0.4s linear;
+  flex-direction: column;
   cursor: pointer;
   position: relative;
-  z-index: 1000;
+  order: 2; /* Бургер-меню справа */
 }
 
 .header__mobile-target {
-  height: 2px;
-  width: 100%;
-  background-color: black;
-  position: relative;
-  transition: all 0.2s linear;
-}
-
-.header__mobile-target::after,
-.header__mobile-target::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background-color: black;
-}
-
-.header__mobile-target::after {
-  top: -7px;
-}
-
-.header__mobile-target::before {
-  bottom: -7px;
-}
-
-.header__mobile-wrapper.active .header__mobile-target {
-  transform: rotate(45deg);
-}
-
-.header__mobile-wrapper.active .header__mobile-target::after {
-  display: none;
-}
-
-.header__mobile-wrapper.active .header__mobile-target::before {
-  top: 0;
-  transform: rotate(90deg);
+  width: 25px;
+  height: 3px;
+  background: #333;
+  margin: 3px 0;
+  transition: 0.4s;
 }
 
 .header__mobile-menu {
-  position: absolute;
-  top: 0;
-  left: 100%;
   display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 200px;
   flex-direction: column;
-  gap: 15px;
-  background-color: #387ef6;
-  padding: 15px 20px;
-  min-width: 160px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-  z-index: 999;
+  gap: 12px;
+  z-index: 1000;
 }
 
 .header__mobile-wrapper.active .header__mobile-menu {
   display: flex;
 }
 
-@media (max-width: 560px) {
-  .header__wrapper {
-    flex-direction: row-reverse;
-    justify-content: space-between;
-  }
-
+/* Адаптивность */
+@media (max-width: 768px) {
   .header__nav {
     display: none;
   }
-
+  
   .header__mobile-wrapper {
     display: flex;
-    align-items: center;
+  }
+  
+  /* Правильный порядок для мобильной версии */
+  .header__wrapper {
+    justify-content: space-between;
+  }
+  
+  .header__logo {
+    order: 1; /* Логотип слева */
+    margin-right: auto;
+  }
+  
+  .header__mobile-wrapper {
+    order: 2; /* Бургер-меню справа */
+  }
+}
+
+@media (max-width: 480px) {
+  .header__wrapper {
+    padding: 0 15px;
+  }
+  
+  .header__mobile-menu {
+    right: 0;
+    left: auto;
+    min-width: 180px;
+  }
+  
+  .user-menu {
+    gap: 10px;
+  }
+  
+  .username {
+    font-size: 13px;
+  }
+  
+  .header__logo img {
+    height: 35px;
   }
 }

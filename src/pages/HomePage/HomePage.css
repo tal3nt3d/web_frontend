@@ -1,16 +1,28 @@
+body, html{
+    background-color: #f3f3f7;
+    margin: 0;
+    padding: 0;
+    height: auto;
+}
+
+#root{
+    min-height: 100vh;
+    background-color: #f3f3f7;
+}
+
 .home-banner .btn-primary {
-    background-color: #DE231E !important;
-    border-color: #DE231E !important;
+    background-color: #ff0000 !important;
+    border-color: #ff0000 !important;
 }
 
 .home-banner .btn-primary:hover {
-    background-color: #B91D19 !important;
-    border-color: #B91D19 !important;
+    background-color: #ce241e !important;
+    border-color: #ce241e !important;
 }
 
 .home-banner .btn-primary:active {
-    background-color: #751714 !important;
-    border-color: #751714 !important;
+    background-color: #b01611 !important;
+    border-color: #b01611 !important;
 }
 
 .home-banner {

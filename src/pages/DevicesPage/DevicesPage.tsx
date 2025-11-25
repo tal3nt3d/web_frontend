@@ -3,21 +3,33 @@ import Header from '../../components/Header/Header';
 import Search from '../../components/InputField/InputField';
 import DevicesList from '../../components/DevicesList/DevicesList';
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs';
-import CartButton from '../../components/CartButton/CartButton';
+import '../../components/CartButton/CartButton.css'
 import { ROUTE_LABELS } from '../../Routes';
 import { listDevices } from '../../modules/devicesApi';
 import { DEVICES_MOCK } from '../../modules/mock'; 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setDevices, setLoading } from '../../store/slices/deviceSlice';
 import { setSearchName, addToHistory } from '../../store/slices/searchSlice';
+import { getAmperageApplicationCart } from '../../store/slices/amperage_applicationSlice';
 import './DevicesPage.css';
+import WrenchImage from '../../assets/wrench.svg'
+import { Link } from 'react-router-dom';
+
 
 export default function DevicesPage() {
   const dispatch = useAppDispatch();
   const { devices, loading } = useAppSelector(state => state.devices);
   const { searchTitle } = useAppSelector(state => state.search);
+  const { isAuthenticated } = useAppSelector(state => state.user);
+  const { amperageApplicationCart, devices_count } = useAppSelector(state => state.amperage_application);
 
-  const loadData = async (searchQuery?: string) => {
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(getAmperageApplicationCart());
+    }
+  }, [isAuthenticated, dispatch]);
+
+  const loadDevices = async (searchQuery?: string) => {
     dispatch(setLoading(true));
     
     try {
@@ -48,35 +60,14 @@ export default function DevicesPage() {
   };
 
   useEffect(() => {
-    loadData(searchTitle);
+    loadDevices(searchTitle);
   }, []);
 
   const handleSearch = async () => {
     if (searchTitle) {
       dispatch(addToHistory(searchTitle));
     }
-    await loadData(searchTitle);
-  };
-
-
-  const handleCartClick = async () => {
-    try {
-      const response = await fetch('/api/v1/amperage_application/amperage_application-cart', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      
-      console.log('Cart request successful');
-      
-    } catch (error) {
-      console.error('Error making cart request:', error);
-    }
+    await loadDevices(searchTitle);
   };
 
   return (
@@ -118,7 +109,31 @@ export default function DevicesPage() {
           )}
         </div>
       </main>
-       <CartButton onClick={handleCartClick} />
+
+      {isAuthenticated ? (
+            <Link
+              to={amperageApplicationCart?.id ? `/amperage_application/${amperageApplicationCart.id}` : '#'} 
+              className={`cart-button ${amperageApplicationCart?.id ? 'active' : 'inactive'}`}
+              onClick={(e) => {
+                if (!amperageApplicationCart?.id) {
+                  e.preventDefault();
+                  alert('Корзина пуста!');
+                }
+              }}
+            >
+              <img src={WrenchImage} alt="Корзина"/>
+              {devices_count > 0 && (
+                <span className="cart-badge">{devices_count}</span>
+              )}
+            </Link>
+          ) : (
+            <div 
+              className="cart-button inactive"
+              onClick={() => alert('Корзина неактивна, войдите в систему')}
+            >
+              <img src={WrenchImage} alt="Корзина"/>
+            </div>
+          )}
     </div>
   );
 }
