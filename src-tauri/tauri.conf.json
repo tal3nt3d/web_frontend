@@ -1,0 +1,56 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "web_frontend",
+  "version": "0.1.0",
+  "identifier": "com.tal3nt3d.web-frontend",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:3000",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "plugins": {
+    "tauri": {
+    "allowlist": {
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": ["http://172.27.61.159:9000/**"]
+      }
+    }
+    },
+    "http": {
+        "enabled": true,
+        "all": false,
+        "request": true,
+        "scope": ["http://172.27.61.159:9000/**"]
+      }
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "title": "web_frontend",
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "fullscreen": false,
+        "devtools": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' http://172.27.61.159:9000 data: blob:; connect-src 'self' http://172.27.61.159:8080 http://172.27.61.159:9000; script-src 'self'; style-src 'self' 'unsafe-inline';"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

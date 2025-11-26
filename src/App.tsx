@@ -9,8 +9,21 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import AccountPage from "./pages/AccountPage/AccountPage";
 import AmperageApplicationPage from "./pages/AmperageApplicationPage/AmperageApplicationPage";
 import AmperageApplicationsPage from "./pages/AmperageApplicationsPage/AmperageApplicationsPage";
+import { invoke } from "@tauri-apps/api/core";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(()=>{
+    invoke('tauri', {cmd:'create'})
+      .then(() =>{console.log("Tauri launched")})
+      .catch(() =>{console.log("Tauri not launched")})
+    return () =>{
+      invoke('tauri', {cmd:'close'})
+        .then(() =>{console.log("Tauri launched")})
+        .catch(() =>{console.log("Tauri not launched")})
+    }
+  }, [])
+
   return (
     <BrowserRouter basename="/web_frontend">
       <Routes>
