@@ -1,0 +1,293 @@
+/* AmperageApplicationsPage.css */
+.amperage-applications-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 18px;
+  color: #666;
+}
+
+/* Основной контент */
+.amperage-applications-page main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Заголовок страницы */
+.amperage-applications-header {
+  margin-bottom: 32px;
+}
+
+.amperage-applications-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+}
+
+.amperage-applications-header p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+/* Сообщение об ошибке */
+.error-message {
+  background-color: #ffe6e6;
+  border: 1px solid #ffcccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  color: #d63031;
+  font-size: 14px;
+}
+
+/* Контейнер таблицы */
+.amperage-applications-table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Обёртка таблицы */
+.amperage-applications-table-wrapper {
+  width: 100%;
+}
+
+/* Заголовок таблицы */
+.amperage-applications-table-header {
+  display: grid;
+  grid-template-columns: 80px 150px 1fr 120px 120px 120px 120px 1fr;
+  gap: 16px;
+  padding: 20px 24px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1a1a;
+}
+
+.status-header {
+  min-width: 150px;
+}
+
+/* Тело таблицы */
+.amperage-applications-table-body {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* Строка таблицы */
+.amperage-applications-table-row {
+  display: grid;
+  grid-template-columns: 80px 150px 1fr 120px 120px 120px 120px 1fr;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f3f4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+
+.amperage-applications-table-row:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.amperage-applications-table-row:last-child {
+  border-bottom: none;
+}
+
+/* Стили для ячеек */
+.amperage-applications-id,
+.creator,
+.date-create,
+.date-forming,
+.date-finish,
+.moderator {
+  font-size: 14px;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.amperage-applications-id {
+  font-weight: 600;
+  color: #005bff;
+}
+
+/* Бейджи статусов */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 120px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.status-draft {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.status-formed {
+  background-color: #cce7ff;
+  color: #0056b3;
+  border: 1px solid #b3d7ff;
+}
+
+.status-completed {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.status-rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Состояние пустого списка */
+.empty-amperage-applications {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.empty-amperage-applications p {
+  font-size: 18px;
+  color: #666;
+  margin: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+  .amperage-applications-table-header,
+  .amperage-applications-table-row {
+    grid-template-columns: 60px 140px 1fr 100px 100px 100px 100px 1fr;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .amperage-applications-table-header,
+  .amperage-applications-table-row {
+    grid-template-columns: 60px 140px 1fr 90px 90px 90px 90px 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .amperage-applications-page main {
+    padding: 16px;
+  }
+  
+  .amperage-applications-header h1 {
+    font-size: 24px;
+  }
+  
+  .amperage-applications-table-container {
+    border-radius: 8px;
+  }
+  
+  .amperage-applications-table-header {
+    display: none;
+  }
+  
+  .amperage-applications-table-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border-bottom: 1px solid #e9ecef;
+    position: relative;
+  }
+  
+  .amperage-applications-table-row::before {
+    content: "ID: #" attr(data-id);
+    font-weight: 600;
+    color: #005bff;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .amperage-applications-id {
+    display: none;
+  }
+  
+  .status-badge {
+    align-self: flex-start;
+    min-width: 140px;
+    text-align: center;
+  }
+  
+  /* Для мобильной версии показываем метки для каждой ячейки */
+  .creator::before {
+    content: "Создатель: ";
+    font-weight: 600;
+    color: #666;
+  }
+  
+  .date-create::before {
+    content: "Дата создания: ";
+    font-weight: 600;
+    color: #666;
+  }
+  
+  .date-forming::before {
+    content: "Дата формирования: ";
+    font-weight: 600;
+    color: #666;
+  }
+  
+  .date-finish::before {
+    content: "Дата завершения: ";
+    font-weight: 600;
+    color: #666;
+  }
+  
+  .moderator::before {
+    content: "Модератор: ";
+    font-weight: 600;
+    color: #666;
+  }
+}
+
+/* Стили для скроллбара */
+.amperage-applications-table-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.amperage-applications-table-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.amperage-applications-table-body::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.amperage-applications-table-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

@@ -110,12 +110,12 @@ export default function DevicesPage() {
         </div>
       </main>
 
-      {isAuthenticated ? (
+      {isAuthenticated && (amperageApplicationCart?.id &&amperageApplicationCart?.id > 0) ? (
             <Link
               to={amperageApplicationCart?.id ? `/amperage_application/${amperageApplicationCart.id}` : '#'} 
               className={`cart-button ${amperageApplicationCart?.id ? 'active' : 'inactive'}`}
               onClick={(e) => {
-                if (!amperageApplicationCart?.id) {
+                if (amperageApplicationCart?.id === -1) {
                   e.preventDefault();
                   alert('Корзина пуста!');
                 }

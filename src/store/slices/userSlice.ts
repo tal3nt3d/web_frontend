@@ -45,9 +45,9 @@ export const registerUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk(
   '/signout',
-  async (username:string, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await api.users.signoutCreate(username);
+      const response = await api.users.signoutCreate();
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.description || 'Ошибка при выходе');

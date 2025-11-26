@@ -20,7 +20,7 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    dispatch(logoutUser(username));
+    dispatch(logoutUser());
   };
 
   return (
@@ -45,6 +45,9 @@ export default function Header() {
               <NavLink to={`/users/${username}/info`} className="header__link">
                 Профиль
               </NavLink>
+              <NavLink to={`/amperage_applications`} className={`header__link`}>
+                  Мои заявки
+                </NavLink>
               <Link to={`/`} className="header__link" onClick={handleLogout}>
                 Выйти
               </Link>
@@ -76,6 +79,9 @@ export default function Header() {
               <div className="user-menu-mobile">
                 <NavLink to={`/users/${username}/info`} className="header__link">
                   Профиль
+                </NavLink>
+                <NavLink to={`/amperage_applications`} className={`header__link`}>
+                  Мои заявки
                 </NavLink>
                 <NavLink to={`/`} className="header__link" onClick={handleLogout}>
                   Выйти

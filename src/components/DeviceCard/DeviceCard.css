@@ -70,13 +70,13 @@
     background-color: #b01611;
 }
 
-/* .card-application-button {
+.card-application-button {
     width: 75px;
     height: 40px;
     border-radius: 6px;
     background-color: white;
-    color: #DE231E;
-    border: 1px solid #DE231E;
+    color: #ff0000;
+    border: 1px solid #ff0000;
     align-content: center;
     text-align: center;
     font-size: 12px;
@@ -93,4 +93,4 @@
 
 .card-application-button:active {
     background-color: #ccc0c0;
-} */
+}
