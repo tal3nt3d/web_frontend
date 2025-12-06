@@ -12,7 +12,7 @@ import { setDevices, setLoading } from '../../store/slices/deviceSlice';
 import { setSearchName, addToHistory } from '../../store/slices/searchSlice';
 import { getAmperageApplicationCart } from '../../store/slices/amperage_applicationSlice';
 import './DevicesPage.css';
-import WrenchImage from '../../assets/wrench.svg'
+import WrenchImage from '../../assets/wrench.svg';
 import { Link } from 'react-router-dom';
 
 

@@ -84,6 +84,11 @@ export default function DeviceCard({ device }: { device: Device; }) {
                     {addLoading ? 'Добавление...' : 'Добавить в расчёт'}
                 </button>
 
+                {addError && (
+                    <div className="add-error-message">
+                        {addError}
+                    </div>
+                )}
             </div>
         </div>
     );

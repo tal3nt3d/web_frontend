@@ -36,33 +36,41 @@ export default function AmperageApplicationPage() {
     setTimeout(() => setNotification(null), 3000);
   };
 
+  useEffect(() => {
+    if (amperageApplicationDetail) {
+      const appData = getAmperageApplicationData();
+      const loadedAmperage = appData?.amperage || appData?.amperage_application?.amperage || 0;
+      setAmperage(loadedAmperage);
+    }
+  }, [amperageApplicationDetail]);
+
   // const isDraft = () => {
   //    const status = amperageApplicationDetail?.research?.status || amperageApplicationDetail?.status;
   //    return status === 'draft';
   // };
 
   const getDevices = () => {
-  if (!amperageApplicationDetail) return [];
-  
-  const devices = amperageApplicationDetail.devices || [];
-  
-  const deviceApplications = amperageApplicationDetail.amperage_applicationDevices || [];
-  
-  const mergedDevices = devices.map(device => {
-    const deviceApplication = deviceApplications.find((da: any) => 
-      da.device_id === device.device_id
-    );
+    if (!amperageApplicationDetail) return [];
     
-    return {
-      ...device,
-      id: device.device_id,
-      amount: deviceApplication?.amount || 1,
-      device_application_id: deviceApplication?.id,
-    };
-  });
+    const devices = amperageApplicationDetail.devices || [];
+    
+    const deviceApplications = amperageApplicationDetail.amperage_applicationDevices || [];
+    
+    const mergedDevices = devices.map(device => {
+      const deviceApplication = deviceApplications.find((da: any) => 
+        da.device_id === device.device_id
+      );
+      
+      return {
+        ...device,
+        id: device.device_id,
+        amount: deviceApplication?.amount || 1,
+        device_application_id: deviceApplication?.id,
+      };
+    });
 
-  return mergedDevices;
-};
+    return mergedDevices;
+  };
 
   const getAmperageApplicationData = () => {
     return amperageApplicationDetail?.amperage_application || amperageApplicationDetail;
@@ -386,18 +394,20 @@ function DeviceRow({
           <span>{device.dev_power} кВт</span>
         </div>
         
-        {isDraft ? (
-          <div className="amount-input-container">
-            <input 
-              type="number" 
-              step="1"
-              min="1"
-              max="100"
-              className="content-list-section amount-input"
-              placeholder="Введите количество устройств"
-              value={localDeviceAmount}
-              onChange={(e) => handleAmountChange(parseInt(e.target.value))}
-            />
+        <div className="amount-input-container">
+          <input 
+            type="number" 
+            step="1"
+            min="1"
+            max="100"
+            className="content-list-section amount-input"
+            placeholder="Введите количество устройств"
+            value={localDeviceAmount}
+            onChange={(e) => handleAmountChange(parseInt(e.target.value))}
+            disabled={!isDraft}
+            readOnly={!isDraft}
+          />
+          {isDraft && (
             <button 
               className="btn-save-amount"
               onClick={handleSave}
@@ -405,9 +415,8 @@ function DeviceRow({
             >
               {saveLoading.devices?.[device.device_id] ? '...' : 'Сохранить'}
             </button>
-          </div>
-        ) : ( console.log({isDraft})
-        )}
+          )}
+        </div>
 
         <div className="calculated-amperage">
           <span>{device.calculated_amperage}</span>

@@ -15,17 +15,17 @@ import { useEffect } from "react";
 function App() {
   useEffect(()=>{
     invoke('tauri', {cmd:'create'})
-      .then(() =>{console.log("Tauri launched")})
-      .catch(() =>{console.log("Tauri not launched")})
+      .then((response) =>{console.log(response, "Tauri launched")})
+      .catch((response) =>{console.log(response, "Tauri not launched")})
     return () =>{
       invoke('tauri', {cmd:'close'})
-        .then(() =>{console.log("Tauri launched")})
-        .catch(() =>{console.log("Tauri not launched")})
+        .then((response) =>{console.log(response, "Tauri launched")})
+        .catch((response) =>{console.log(response, "Tauri not launched")})
     }
   }, [])
 
   return (
-    <BrowserRouter basename="/web_frontend">
+    <BrowserRouter basename="">
       <Routes>
         <Route path={ROUTES.Home} element={<HomePage />} />
         <Route path={ROUTES.Devices} element={<DevicesPage />} />

@@ -7,13 +7,18 @@ import { useAppSelector } from '../../store/hooks';
 import { api } from '../../api';
 import './AmperageApplicationsPage.css';
 
-export default function ResearchesPage() {
+export default function AmperageApplicationsPage() {
   const navigate = useNavigate();
   
   const { isAuthenticated } = useAppSelector(state => state.user);
   const [amperageApplications, setAmperageApplications] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const [statusFilter, setStatusFilter] = useState<string>('');
+  const [fromDateFilter, setFromDateFilter] = useState<string>('');
+  const [toDateFilter, setToDateFilter] = useState<string>('');
+  const [filtersApplied, setFiltersApplied] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -23,20 +28,37 @@ export default function ResearchesPage() {
     loadAmperageApplications();
   }, [isAuthenticated, navigate]);
 
-console.log('Amperage applications:', amperageApplications);
-
-  const loadAmperageApplications = async () => {
+  const loadAmperageApplications = async (filters?: {
+    status?: string;
+    fromDate?: string;
+    toDate?: string;
+  }) => {
     setLoading(true);
     setError('');
     
     try {
-      const response = await api.amperageApplication.allAmperageApplicationsList();
+      const query: any = {};
+      if (filters?.status) query.status = filters.status;
+      if (filters?.fromDate) query['from-date'] = filters.fromDate;
+      if (filters?.toDate) query['to-date'] = filters.toDate;
+
+      const response = await api.amperageApplication.allAmperageApplicationsList(query);
       setAmperageApplications(response.data);
     } catch (error: any) {
       setError(error.response?.data?.description || 'Ошибка загрузки расчётов');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleApplyFilters = () => {
+    const filters: any = {};
+    if (statusFilter) filters.status = statusFilter;
+    if (fromDateFilter) filters.fromDate = fromDateFilter;
+    if (toDateFilter) filters.toDate = toDateFilter;
+    
+    setFiltersApplied(true);
+    loadAmperageApplications(filters);
   };
 
   const getStatusText = (status: string) => {
@@ -92,6 +114,59 @@ console.log('Amperage applications:', amperageApplications);
           <p>Всего расчётов: {amperageApplications.length}</p>
         </div>
 
+        <div className="filters-section">
+          <h2 className="filters-title">Фильтрация</h2>
+          
+          <div className="filters-grid">
+            <div className="filter-group">
+              <label htmlFor="status-filter" className="filter-label">Статус расчёта</label>
+              <select
+                id="status-filter"
+                className="filter-select"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+              >
+                <option value="">Все статусы</option>
+                <option value="formed">Сформирована</option>
+                <option value="finished">Завершена</option>
+                <option value="declined">Отклонена</option>
+              </select>
+            </div>
+            
+            <div className="filter-group">
+              <label htmlFor="from-date-filter" className="filter-label">Поиск с даты</label>
+              <input
+                id="from-date-filter"
+                type="date"
+                className="filter-date-input"
+                value={fromDateFilter}
+                onChange={(e) => setFromDateFilter(e.target.value)}
+              />
+            </div>
+            
+            <div className="filter-group">
+              <label htmlFor="to-date-filter" className="filter-label">Поиск до даты</label>
+              <input
+                id="to-date-filter"
+                type="date"
+                className="filter-date-input"
+                value={toDateFilter}
+                onChange={(e) => setToDateFilter(e.target.value)}
+              />
+            </div>
+          </div>
+          
+          <div className="filter-buttons">
+            <button 
+              className="apply-filters-btn"
+              onClick={handleApplyFilters}
+            >
+              Применить фильтры
+            </button>
+          </div>
+        
+        </div>
+
         {error && (
           <div className="error-message">
             {error}
@@ -142,8 +217,13 @@ console.log('Amperage applications:', amperageApplications);
               </div>
             </div>
           ) : (
-            <div className="empty-researches">
-              <p>Расчёты не найдены</p>
+            <div className="empty-amperage-applications">
+              <p>
+                {filtersApplied 
+                  ? 'Расчёты по указанным фильтрам не найдены' 
+                  : 'Расчёты не найдены'
+                }
+              </p>
             </div>
           )}
         </div>

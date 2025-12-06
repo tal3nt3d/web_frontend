@@ -17,7 +17,7 @@ export default defineConfig({
       manifest:{
         name: "EleCalc",
         short_name: "EleCalc",
-        start_url: "/web_frontend/",
+        start_url: "/",
         display: "standalone",
         background_color: "#fdfdfd",
         theme_color: "#db4938",
@@ -35,7 +35,7 @@ export default defineConfig({
       }
     })
   ],
-  base: '/web_frontend',
+  base: '/',
   server: {
     proxy: {
       "/api": {
@@ -73,7 +73,7 @@ export default defineConfig({
 //       manifest:{
 //         name: "EleCalc",
 //         short_name: "EleCalc",
-//         start_url: "/web_frontend/",
+//         start_url: "/",
 //         display: "standalone",
 //         background_color: "#fdfdfd",
 //         theme_color: "#db4938",
@@ -101,13 +101,13 @@ export default defineConfig({
 //     port: 3000,
 //     proxy: {
 //       "/api": {
-//         target: "http://172.27.61.159:8080",
+//         target: "http://localhost:8080",
 //         changeOrigin: true,
 //         secure: false,
 //         //rewrite: (path) => path.replace(/^\/api/, "/api"),
 //       },
 //       "/test": {
-//         target: "http://172.27.61.159:9000",
+//         target: "http://localhost:9000",
 //         changeOrigin: true,
 //         secure: false,
 //       }
