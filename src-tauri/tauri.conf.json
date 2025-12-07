@@ -5,25 +5,26 @@
   "identifier": "com.tal3nt3d.web-frontend",
   "build": {
     "frontendDist": "../dist",
-    "devUrl": "http://localhost:3000",
+    "devUrl": "http://192.168.195.38:3000",
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build"
   },
   "plugins": {
     "tauri": {
-    "allowlist": {
-      "http": {
-        "all": true,
-        "request": true,
-        "scope": ["http://172.27.61.159:9000/**"]
+      "allowlist": {
+        "all": false,
+        "http": {
+          "all": true,
+          "request": true,
+          "scope": ["http://192.168.195.38:*"]
+        }
       }
-    }
     },
     "http": {
         "enabled": true,
         "all": false,
         "request": true,
-        "scope": ["http://172.27.61.159:9000/**"]
+        "scope": ["http://192.168.195.38:*"]
       }
   },
   "app": {
@@ -39,7 +40,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self'; img-src 'self' http://172.27.61.159:9000 data: blob:; connect-src 'self' http://172.27.61.159:8080 http://172.27.61.159:9000; script-src 'self'; style-src 'self' 'unsafe-inline';"
+      "csp": "default-src 'self'; img-src 'self' http://192.168.195.38:* data: blob:; connect-src 'self' http://192.168.195.38:*; script-src 'self'; style-src 'self' 'unsafe-inline';"
     }
   },
   "bundle": {

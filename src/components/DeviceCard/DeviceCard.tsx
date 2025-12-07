@@ -19,9 +19,7 @@ export default function DeviceCard({ device }: { device: Device; }) {
 
     const getImageUrl = (photo: string) => {
         if (!photo) return defaultDeviceImage;
-
-
-        return `http://localhost:9000/test/${photo}`;
+        return `http://192.168.195.38:9000/test/${photo}`;
     };
 
     const [imageUrl, setImageUrl] = useState(getImageUrl(device.photo));

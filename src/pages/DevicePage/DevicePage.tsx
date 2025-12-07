@@ -45,8 +45,7 @@ export default function DevicePage() {
 
   const getImageUrl = (photo: string) => {
     if (!photo || imageError) return deviceErrorPhoto;
-
-    return `http://localhost:9000/test/${photo}`;
+    return `http://192.168.195.38:9000/test/${photo}`;
   };
 
 

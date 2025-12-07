@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import react from '@vitejs/plugin-react'
-import mkcert from 'vite-plugin-mkcert'
-import fs from 'fs';
-import path from 'path';
+// import mkcert from 'vite-plugin-mkcert'
+// import fs from 'fs';
+// import path from 'path';
 
 export default defineConfig({
   plugins: [
-    mkcert(),
+    // mkcert(),
     react(),
     VitePWA({
       registerType: 'autoUpdate',
@@ -37,23 +37,31 @@ export default defineConfig({
   ],
   base: '/',
   server: {
+    cors: true,
+    watch: {
+    usePolling: true,
+    }, 
+    strictPort: true,
+    port: 3000,
     proxy: {
       "/api": {
-        target: "http://localhost:8080",
+        target: "http://192.168.195.38:8080",
         changeOrigin: true,
+        secure: false,
+        // rewrite: (path) => path.replace(/^\/api/, "/"),
+      },
+      "/test": {
+        target: "http://192.168.195.38:9000",
+        changeOrigin: true,
+        secure: false,
         // rewrite: (path) => path.replace(/^\/api/, "/"),
       },
     },
-    watch: {
-        usePolling: true,
-    }, 
     host: true,
-    strictPort: true,
-    port: 3000,
-    https:{
-      key: fs.readFileSync(path.resolve(__dirname, 'cert.key')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'cert.crt')),
-    },
+    // https:{
+    //   key: fs.readFileSync(path.resolve(__dirname, 'cert.key')),
+    //   cert: fs.readFileSync(path.resolve(__dirname, 'cert.crt')),
+    // },
   },
 });
 
