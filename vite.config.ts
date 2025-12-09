@@ -48,13 +48,11 @@ export default defineConfig({
         target: "http://192.168.195.38:8080",
         changeOrigin: true,
         secure: false,
-        // rewrite: (path) => path.replace(/^\/api/, "/"),
       },
       "/test": {
         target: "http://192.168.195.38:9000",
         changeOrigin: true,
         secure: false,
-        // rewrite: (path) => path.replace(/^\/api/, "/"),
       },
     },
     host: true,
