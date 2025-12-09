@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import AccountPage from "./pages/AccountPage/AccountPage";
 import AmperageApplicationPage from "./pages/AmperageApplicationPage/AmperageApplicationPage";
 import AmperageApplicationsPage from "./pages/AmperageApplicationsPage/AmperageApplicationsPage";
-import ModeratorPage from "./pages/ModeratorPage/ModeratorPage";
 import { invoke } from "@tauri-apps/api/core";
 import { useEffect } from "react";
 
@@ -36,7 +35,6 @@ function App() {
         <Route path={ROUTES.Profile} element={<AccountPage />} />
         <Route path={ROUTES.Application} element={<AmperageApplicationPage />} />
         <Route path={ROUTES.Applications} element={<AmperageApplicationsPage />} />
-        <Route path={ROUTES.Moderator} element={<ModeratorPage />} />
       </Routes>
     </BrowserRouter>
   );

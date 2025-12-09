@@ -48,9 +48,6 @@ export default function Header() {
               <NavLink to={`/amperage_applications`} className={`header__link`}>
                 Мои заявки
               </NavLink>
-              <NavLink to={`/moderator`} className={`header__link`}>
-                Панель модератора
-              </NavLink>
               <Link to={`/`} className="header__link" onClick={handleLogout}>
                 Выйти
               </Link>
@@ -85,9 +82,6 @@ export default function Header() {
                 </NavLink>
                 <NavLink to={`/amperage_applications`} className={`header__link`}>
                   Мои заявки
-                </NavLink>
-                <NavLink to={`/moderator`} className={`header__link`}>
-                  Панель модератора
                 </NavLink>
                 <NavLink to={`/`} className="header__link" onClick={handleLogout}>
                   Выйти

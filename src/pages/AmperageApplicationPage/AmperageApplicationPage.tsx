@@ -421,9 +421,11 @@ function DeviceRow({
           )}
         </div>
 
-        <div className="calculated-amperage">
-          <span>{amperage}</span>
-        </div>
+        {amperage !== 0 && (
+          <div className="calculated-amperage">
+            <span>{amperage}</span>
+          </div>
+        )}
 
         {isDraft && (
           <div className="device-actions">
