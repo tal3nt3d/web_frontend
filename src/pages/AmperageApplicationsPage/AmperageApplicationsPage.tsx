@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs';
 import { ROUTE_LABELS } from '../../Routes';
@@ -9,6 +9,7 @@ import './AmperageApplicationsPage.css';
 
 export default function AmperageApplicationsPage() {
   const navigate = useNavigate();
+  const location = useLocation()
   
   const { isAuthenticated } = useAppSelector(state => state.user);
   const [amperageApplications, setAmperageApplications] = useState<any[]>([]);
@@ -26,7 +27,7 @@ export default function AmperageApplicationsPage() {
       return;
     }
     loadAmperageApplications();
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, location.key]);
 
   const loadAmperageApplications = async (filters?: {
     status?: string;

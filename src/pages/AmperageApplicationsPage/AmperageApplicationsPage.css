@@ -364,7 +364,7 @@
   .amperage-applications-table-row::before {
     content: "ID: #" attr(data-id);
     font-weight: 600;
-    color: #005bff;
+    color: #ff0000;
     font-size: 16px;
     margin-bottom: 8px;
   }

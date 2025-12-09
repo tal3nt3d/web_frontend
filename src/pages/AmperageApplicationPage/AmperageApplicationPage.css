@@ -128,9 +128,16 @@
   flex-shrink: 0;
 }
 
-.calculated-amperage {
+.calculated-amperage-header {
   width: 110px;
   text-align: left;
+  flex-shrink: 0;
+  
+}
+
+.calculated-amperage {
+  width: 110px;
+  text-align: center;
   flex-shrink: 0;
 }
 

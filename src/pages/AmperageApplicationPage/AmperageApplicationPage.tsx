@@ -66,6 +66,7 @@ export default function AmperageApplicationPage() {
         id: device.device_id,
         amount: deviceApplication?.amount || 1,
         device_application_id: deviceApplication?.id,
+        amperage: deviceApplication?.amperage || 0,
       };
     });
 
@@ -97,10 +98,10 @@ export default function AmperageApplicationPage() {
   };
 
   const getImageUrl = (device: any) => {
-    if (imageErrors[device.device_id] || !device.image) {
+    if (imageErrors[device.device_id] || !device.photo) {
       return defaultDevice;
     }
-    return `http://localhost:9000/test/${device.image}`;
+    return `http://192.168.195.38:9000/test/${device.photo}`;
   };
 
   const handleSaveAmperage = async () => {
@@ -235,7 +236,7 @@ export default function AmperageApplicationPage() {
   const currentStatus = amperageApplicationData?.status || 'unknown';
 
   const amperageApplicationDisplayId = amperageApplicationData?.id || amperageApplicationId;
-
+;
   return (
     <div className="amperage-application-page">
       <Header />
@@ -264,7 +265,7 @@ export default function AmperageApplicationPage() {
           <span className="device-title-header">Устройство</span>
           <span className="dev-power-header">Мощность устройства</span>
           <span className="amount">Количество</span>
-          <span className="calculated-amperage">Нагрузка устройства</span>
+          <span className="calculated-amperage-header">Нагрузка устройства</span>
             <input  
               type="text" 
               className="content-list-section amperage-input"
@@ -292,6 +293,7 @@ export default function AmperageApplicationPage() {
             {devices.map((device) => (
               <DeviceRow 
                 key={device.id}
+                amperage={device.amperage}
                 device={device}
                 isDraft={(currentStatus === "draft")}
                 onSaveDeviceAmount={handleSaveDeviceAmount}
@@ -343,6 +345,7 @@ export default function AmperageApplicationPage() {
 
 function DeviceRow({ 
   device, 
+  amperage,
   isDraft, 
   onSaveDeviceAmount, 
   onRemoveDevice, 
@@ -419,7 +422,7 @@ function DeviceRow({
         </div>
 
         <div className="calculated-amperage">
-          <span>{device.calculated_amperage}</span>
+          <span>{amperage}</span>
         </div>
 
         {isDraft && (

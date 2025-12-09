@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import react from '@vitejs/plugin-react'
-// import mkcert from 'vite-plugin-mkcert'
-// import fs from 'fs';
-// import path from 'path';
+import mkcert from 'vite-plugin-mkcert'
+import fs from 'fs';
+import path from 'path';
 
 export default defineConfig({
   plugins: [
-    // mkcert(),
+    mkcert(),
     react(),
     VitePWA({
       registerType: 'autoUpdate',
@@ -45,78 +45,20 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "http://192.168.195.38:8080",
+        target: "https://192.168.195.38:8080",
         changeOrigin: true,
         secure: false,
       },
       "/test": {
-        target: "http://192.168.195.38:9000",
+        target: "https://192.168.195.38:9000",
         changeOrigin: true,
         secure: false,
       },
     },
     host: true,
-    // https:{
-    //   key: fs.readFileSync(path.resolve(__dirname, 'cert.key')),
-    //   cert: fs.readFileSync(path.resolve(__dirname, 'cert.crt')),
-    // },
+    https:{
+      key: fs.readFileSync(path.resolve(__dirname, 'cert.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'cert.crt')),
+    },
   },
 });
-
-// Настройка для работы Tauri
-// import { defineConfig } from 'vite'
-// import { VitePWA } from 'vite-plugin-pwa'
-// import react from '@vitejs/plugin-react'
-
-// export default defineConfig({
-//   plugins: [
-//     react(),
-//     VitePWA({
-//       registerType: 'autoUpdate',
-//       devOptions: {
-//         enabled: true,
-//       },
-//       manifest:{
-//         name: "EleCalc",
-//         short_name: "EleCalc",
-//         start_url: "/",
-//         display: "standalone",
-//         background_color: "#fdfdfd",
-//         theme_color: "#db4938",
-//         orientation: "portrait-primary",
-//         icons: [
-//           {
-//             "src": "small_logo512x512.png",
-//             "type": "image/png", "sizes": "192x192"
-//           },
-//           {
-//             "src": "small_logo512x512.png",
-//             "type": "image/png", "sizes": "512x512"
-//           }
-//         ],
-//       }
-//     })
-//   ],
-//   base: '/',
-//   server: {
-//     cors: true,
-//     watch: {
-//         usePolling: true,
-//     }, 
-//     strictPort: true,
-//     port: 3000,
-//     proxy: {
-//       "/api": {
-//         target: "http://localhost:8080",
-//         changeOrigin: true,
-//         secure: false,
-//         //rewrite: (path) => path.replace(/^\/api/, "/api"),
-//       },
-//       "/test": {
-//         target: "http://localhost:9000",
-//         changeOrigin: true,
-//         secure: false,
-//       }
-//     },
-//   },
-// });

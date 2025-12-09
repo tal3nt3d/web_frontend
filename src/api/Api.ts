@@ -37,6 +37,7 @@ export interface SerializerDeviceJSON {
   dev_power?: number;
   device_id?: number;
   is_delete?: boolean;
+  photo?: string;
   title?: string;
 }
 
@@ -310,7 +311,7 @@ export class Api<
      *
      * @tags amperage_applications
      * @name DeleteAmperageApplicationDelete
-     * @summary Удалить заявка
+     * @summary Удалить заявку
      * @request DELETE:/amperage_application/{id}/delete-amperage_application
      * @secure
      */
@@ -324,23 +325,45 @@ export class Api<
       }),
 
     /**
+     * @description Принимает результаты расчета нагрузки устройства от асинхронного сервиса
+     *
+     * @tags amperage_applications
+     * @name DeviceAmperageUpdate
+     * @summary Обновить нагрузку устройства (для асинхронного сервиса)
+     * @request PUT:/amperage_application/{id}/device_amperage
+     */
+    deviceAmperageUpdate: (
+      id: number,
+      data: Record<string, any>,
+      params: RequestParams = {},
+    ) =>
+      this.request<Record<string, string>, Record<string, string>>({
+        path: `/amperage_application/${id}/device_amperage`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * @description Обновляет данные заявки
      *
      * @tags amperage_applications
      * @name EditAmperageApplicationUpdate
-     * @summary Изменить заявка
+     * @summary Изменить заявку
      * @request PUT:/amperage_application/{id}/edit-amperage_application
      * @secure
      */
     editAmperageApplicationUpdate: (
       id: number,
-      amperage_applicatio: SerializerAmperageApplicationJSON,
+      amperage_application: SerializerAmperageApplicationJSON,
       params: RequestParams = {},
     ) =>
       this.request<SerializerAmperageApplicationJSON, Record<string, string>>({
         path: `/amperage_application/${id}/edit-amperage_application`,
         method: "PUT",
-        body: amperage_applicatio,
+        body: amperage_application,
         secure: true,
         type: ContentType.Json,
         format: "json",
@@ -591,7 +614,7 @@ export class Api<
         ...params,
       }),
   };
-  users = {
+  signin = {
     /**
      * @description Принимает логин/пароль, возвращает jwt-токен в формате {"token":"..."}.
      *
@@ -612,25 +635,8 @@ export class Api<
         format: "json",
         ...params,
       }),
-
-    /**
-     * @description Удаляет токен текущего пользователя из хранилища. Возвращает {"status":"signed_out"}.
-     *
-     * @tags users
-     * @name SignoutCreate
-     * @summary Выход (удаление токена)
-     * @request POST:/users/signout
-     * @secure
-     */
-    signoutCreate: (params: RequestParams = {}) =>
-      this.request<Record<string, string>, Record<string, string>>({
-        path: `/users/signout`,
-        method: "POST",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
+  };
+  signup = {
     /**
      * @description Регистрирует нового пользователя. Возвращает URL созданного ресурса в Location и тело созданного пользователя.
      *
@@ -645,6 +651,25 @@ export class Api<
         method: "POST",
         body: user,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+  };
+  users = {
+    /**
+     * @description Удаляет токен текущего пользователя из хранилища. Возвращает {"status":"signed_out"}.
+     *
+     * @tags users
+     * @name SignoutCreate
+     * @summary Выход (удаление токена)
+     * @request POST:/users/signout
+     * @secure
+     */
+    signoutCreate: (params: RequestParams = {}) =>
+      this.request<Record<string, string>, Record<string, string>>({
+        path: `/users/signout`,
+        method: "POST",
+        secure: true,
         format: "json",
         ...params,
       }),
