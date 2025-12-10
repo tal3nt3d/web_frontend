@@ -442,3 +442,40 @@
   border-color: #ff0000;
   box-shadow: 0 0 0 3px rgba(0, 91, 255, 0.1);
 }
+
+.actions-cell button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-approve {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-approve:hover {
+  background-color: #218838;
+}
+
+.btn-approve:active {
+  background-color: #035316;
+}
+
+.btn-reject {
+  background-color: #f7132a;
+  color: white;
+}
+
+.btn-reject:hover {
+  background-color: #dd182b;
+}
+
+.btn-reject:active{
+  background-color: #99111f;
+}
